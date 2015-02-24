@@ -22,26 +22,21 @@ $(function() {
 });
 
 function greyOut(){
-  // var button = document.getElementById("update_course_button");
-  // setTimeout(function(){button.disabled = true;}, 1);
-
   $("#update_course_button").attr("disabled","disabled");
   $(".edit_course").submit();
 }
 
 function hideSection(){
-  if (document.getElementById("grade_list")!= "null"){
-    var section = document.getElementById("grade_list");
-    var last = section.lastElementChild;
-    last.style.display = 'none';
+  var grade_list = $("#grade_list");
+  if(grade_list != "null"){
+    grade_list.children().last().hide();
   }
 }
 
 function addRow(){
-  if (document.getElementById("grade_list")!= "null"){
-    var section = document.getElementById("grade_list");
-    var last = section.lastElementChild;
-    last.style.display = 'block';
+  var grade_list = $("#grade_list");
+  if(grade_list != "null"){
+    grade_list.children().last().show();
   }
 }
 
