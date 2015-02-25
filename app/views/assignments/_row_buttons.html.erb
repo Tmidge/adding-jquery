@@ -1,4 +1,42 @@
 <% if assignment.status(current_user).name != "Future" %>
+  <%= link_to '<i class="fa fa-umbrella" title="Take Assignment"></i>'.html_safe, "#myModal_#{assignment.id}",  role: "button", data:{toggle: "modal"} %>
+
+  <!-- Modal -->
+  <div id="myModal_<%=assignment.id%>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Change Class date</h3>
+    </div>
+    <div class="modal-body">
+      <head>
+        <meta charset="utf-8">
+        <title>jQuery UI Datepicker - Default functionality</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css">
+          <script>
+            $(function() {
+              $( "#startdatepicker" ).datepicker({dateFormat: "yy-mm-dd"});
+              $( "#enddatepicker" ).datepicker({dateFormat: "yy-mm-dd"});
+            });
+          </script>
+      </head>
+
+        <body>
+          <%= form_for(assignment) do |f| %>
+
+            <p>Start Date:<%= f.text_field :active_at, value: db_datetime_string(assignment.active_at), id:"startdatepicker"%></p>
+            <p>End Date:<%= f.text_field :due_at, value: db_datetime_string(assignment.due_at), id:"enddatepicker"%></p>
+
+          <%end%>
+        </body>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      <button class="btn btn-primary" id= <%=assignment.id %> onclick="saveDate(event);">Save changes</button>
+    </div>
+  </div>
   <%= link_to '<i class="fa fa-edit" title="Take Assignment"></i>'.html_safe, assignment_path(assignment) %>
 <% else %>
   <i class="fa fa-edit muted" title="Take Assignment"></i>

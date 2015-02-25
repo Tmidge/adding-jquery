@@ -19,6 +19,7 @@ $(function() {
   $("#add-row").on("click", addRow);
   $("#update_course_button").on("click", greyOut);
   $(".delete-association").on("click", deleteRow);
+
 });
 
 function greyOut(){
@@ -42,4 +43,9 @@ function addRow(){
 
 function deleteRow(event){
   $(event.target).closest(".association").css("display", "none");
+}
+
+function saveDate(event){
+  var id = event.target.id;
+  $("#edit_assignment_"+id).submit();
 }
